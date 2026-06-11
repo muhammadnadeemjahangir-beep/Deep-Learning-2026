@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PGD Deep Learning 2026 — Study Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+  :root {
+    --sidebar-w: 260px;
+    --w12: #818cf8;
+    --w3:  #fbbf24;
+    --w4:  #34d399;
+    --w5:  #60a5fa;
+    --w6:  #f472b6;
+    --w7:  #2dd4bf;
+    --w8:  #fb7185;
+    --text: #0f172a;
+    --muted: #475569;
+    --border: #cbd5e1;
+    --bg: #f0f4f8;
+    --white: #ffffff;
+    --callout-bg: #dbeafe;
+    --callout-border: #2563eb;
+    --exam-bg: #fef3c7;
+    --exam-border: #d97706;
+    --code-bg: #1e1e2e;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+    background: linear-gradient(135deg, #f0f4f8 0%, #f5f0ff 50%, #f0f7ff 100%);
+    min-height: 100vh;
+    display: flex;
+  }
+
+  /* ── Sidebar ── */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #0d1117 0%, #0f172a 100%);
+    color: #cbd5e1;
+    padding: 0 0 40px;
+    z-index: 100;
+    font-size: 13px;
+    border-right: 1px solid #1e293b;
+  }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  #sidebar-header {
+    background: linear-gradient(135deg, #0d1117 0%, #1a1f3a 100%);
+    padding: 22px 16px 18px;
+    border-bottom: 1px solid #1e3a5f;
+    position: sticky;
+    top: 0;
+  }
+  #sidebar-header .course-title {
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #818cf8;
+    margin-bottom: 5px;
+  }
+  #sidebar-header .course-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f1f5f9;
+    line-height: 1.3;
+  }
+  .toc-section { padding: 8px 0; }
+  .toc-section-label {
+    padding: 10px 16px 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #334155;
+  }
+  .toc-link {
+    display: block;
+    padding: 5px 16px 5px 20px;
+    color: #8b9cb6;
+    text-decoration: none;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+  .toc-link:hover { color: #e2e8f0; background: rgba(129,140,248,0.1); border-left-color: #818cf8; }
+  .toc-link.sub {
+    padding-left: 30px;
+    font-size: 12px;
+    color: #4b5e75;
+  }
+  .toc-link.sub:hover { color: #8b9cb6; background: rgba(129,140,248,0.06); }
+  .week-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* ── Main content ── */
+  #main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    min-width: 0;
+    padding: 40px 60px 80px;
+    max-width: 1000px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #0f172a 40%, #1a1040 70%, #0f2240 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 52px 56px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(129,140,248,0.15);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(129,140,248,0.3) 0%, rgba(96,165,250,0.1) 40%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 200px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(244,114,182,0.15) 0%, transparent 65%);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    line-height: 1.25;
+    position: relative;
+    background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 60%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: #94a3b8;
+    max-width: 600px;
+    font-size: 15px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 13px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── Section headings ── */
+  h2 {
+    font-size: 23px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 56px 0 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, #818cf8, #60a5fa, #2dd4bf, transparent) 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2 .week-badge {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 30px 0 12px;
+    padding-left: 12px;
+    border-left: 3px solid #818cf8;
+  }
+  h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 22px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h4::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #cbd5e1, transparent);
+  }
+
+  /* ── Paragraphs and lists ── */
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 0 0 12px 20px; }
+  li { margin-bottom: 4px; }
+  strong { font-weight: 600; color: #0f172a; }
+
+  /* ── Code blocks ── */
+  pre {
+    border-radius: 12px;
+    margin: 16px 0;
+    overflow-x: auto;
+    font-size: 13px;
+    border: 1px solid rgba(129,140,248,0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    position: relative;
+  }
+  pre::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, #818cf8, #60a5fa, #2dd4bf);
+    border-radius: 12px 12px 0 0;
+    margin: 0 0 0;
+  }
+  pre code { font-family: 'Fira Code', monospace !important; }
+  code:not(pre code) {
+    font-family: 'Fira Code', monospace;
+    font-size: 12.5px;
+    background: linear-gradient(135deg, #f0f4ff, #faf0ff);
+    color: #7c3aed;
+    padding: 2px 7px;
+    border-radius: 5px;
+    border: 1px solid #ddd6fe;
+    font-weight: 500;
+  }
+
+  /* ── Tables ── */
+  .table-wrap { overflow-x: auto; margin: 16px 0 20px; border-radius: 12px; border: 1px solid #cbd5e1; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #94a3b8;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 11px 16px;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+  }
+  th:first-child { border-radius: 12px 0 0 0; }
+  th:last-child { border-radius: 0 12px 0 0; }
+  td { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f8f0ff; }
+
+  /* ── Callout boxes ── */
+  .callout {
+    background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+    border-left: 4px solid #3b82f6;
+    border-radius: 0 10px 10px 0;
+    padding: 15px 20px;
+    margin: 18px 0;
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(59,130,246,0.1);
+  }
+  .callout.exam {
+    background: linear-gradient(135deg, #fde68a 0%, #fef3c7 100%);
+    border-left-color: #d97706;
+    box-shadow: 0 2px 10px rgba(217,119,6,0.15);
+  }
+  .callout.green {
+    background: linear-gradient(135deg, #bbf7d0 0%, #f0fdf4 100%);
+    border-left-color: #16a34a;
+    box-shadow: 0 2px 10px rgba(22,163,74,0.1);
+  }
+  .callout.red {
+    background: linear-gradient(135deg, #fecdd3 0%, #fff1f2 100%);
+    border-left-color: #e11d48;
+    box-shadow: 0 2px 10px rgba(225,29,72,0.1);
+  }
+  .callout-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 7px;
+    color: #1d4ed8;
+  }
+  .callout.exam .callout-label { color: #92400e; }
+  .callout.green .callout-label { color: #14532d; }
+  .callout.red .callout-label { color: #9f1239; }
+
+  /* ── Pipeline flow ── */
+  .pipeline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 14px 0;
+    font-size: 13px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #0f172a, #1e1040);
+    border-radius: 10px;
+    border: 1px solid rgba(129,140,248,0.2);
+  }
+  .pipeline-step {
+    background: rgba(129,140,248,0.15);
+    border: 1px solid rgba(129,140,248,0.35);
+    color: #c7d2fe;
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  .pipeline-arrow { color: #4b5563; font-size: 16px; padding: 0 2px; }
+
+  /* ── Result cards ── */
+  .result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .result-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f0ff 100%);
+    border: 1px solid #ddd6fe;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(124,58,237,0.08);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(124,58,237,0.14);
+  }
+  .result-card .val {
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #7c3aed, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+  .result-card .lbl {
+    font-size: 11px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  /* ── File list ── */
+  .file-list {
+    list-style: none;
+    margin: 0 0 20px;
+    background: #0f172a;
+    border-radius: 10px;
+    padding: 12px 0;
+    border: 1px solid #1e293b;
+  }
+  .file-list li {
+    font-family: 'Fira Code', monospace;
+    font-size: 12.5px;
+    color: #94a3b8;
+    padding: 4px 16px 4px 36px;
+    position: relative;
+    margin-bottom: 1px;
+  }
+  .file-list li::before {
+    content: '◈';
+    position: absolute;
+    left: 14px;
+    color: #4f46e5;
+    font-size: 11px;
+  }
+
+  /* ── Exam question list ── */
+  .exam-questions ol { margin-left: 0; padding-left: 0; list-style: none; counter-reset: q; }
+  .exam-questions ol li {
+    counter-increment: q;
+    margin-bottom: 14px;
+    padding-left: 36px;
+    position: relative;
+  }
+  .exam-questions ol li::before {
+    content: 'Q' counter(q);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    background: #fbbf24;
+    color: #78350f;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    line-height: 1.5;
+  }
+
+  /* ── Glossary ── */
+  .glossary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .glossary-item {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 13px 15px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    border-top: 3px solid transparent;
+    border-top-color: #818cf8;
+  }
+  .glossary-item:nth-child(4n+1) { border-top-color: #818cf8; }
+  .glossary-item:nth-child(4n+2) { border-top-color: #f472b6; }
+  .glossary-item:nth-child(4n+3) { border-top-color: #34d399; }
+  .glossary-item:nth-child(4n+4) { border-top-color: #fbbf24; }
+  .glossary-item:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+  .glossary-term {
+    font-weight: 700;
+    font-size: 13px;
+    color: #0f172a;
+    margin-bottom: 4px;
+  }
+  .glossary-def {
+    font-size: 12.5px;
+    color: #475569;
+    line-height: 1.5;
+  }
+
+  /* ── Progress overview ── */
+  .progress-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .progress-step {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .progress-step:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  .progress-step .wk {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 7px;
+  }
+  .progress-step .topic {
+    font-size: 12px;
+    color: #475569;
+    line-height: 1.4;
+  }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+  a { color: #6366f1; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Hamburger button (mobile only) ── */
+  #menu-toggle {
+    display: none;
+    position: fixed;
+    top: 14px; left: 14px;
+    z-index: 200;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    width: 40px; height: 40px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 9px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  #menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #94a3b8;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  #menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #menu-toggle.open span:nth-child(2) { opacity: 0; }
+  #menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Sidebar overlay (mobile) ── */
+  #sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+    backdrop-filter: blur(2px);
+  }
+
+  /* ── Responsive breakpoints ── */
+  @media (max-width: 900px) {
+    #menu-toggle { display: flex; }
+
+    #sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      z-index: 150;
+    }
+    #sidebar.open { transform: translateX(0); }
+
+    #sidebar-overlay.open { display: block; }
+
+    #main {
+      margin-left: 0;
+      padding: 60px 20px 60px;
+      max-width: 100%;
+    }
+
+    .hero {
+      padding: 32px 24px;
+      border-radius: 14px;
+    }
+    .hero h1 { font-size: 22px; }
+
+    h2 { font-size: 19px; margin: 40px 0 14px; }
+    h3 { font-size: 16px; }
+
+    .result-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .progress-flow {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .glossary-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pipeline {
+      padding: 10px 12px;
+    }
+
+    pre { font-size: 12px; }
+  }
+
+  @media (max-width: 480px) {
+    #main { padding: 56px 14px 48px; }
+
+    .hero { padding: 24px 18px; }
+    .hero h1 { font-size: 19px; }
+    .hero p { font-size: 13px; }
+    .badge-row { gap: 6px; }
+    .badge { font-size: 11px; padding: 4px 9px; }
+
+    h2 { font-size: 17px; gap: 8px; }
+    .week-badge { font-size: 10px; padding: 3px 8px; }
+
+    .result-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .result-card .val { font-size: 20px; }
+
+    .progress-flow { grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    table { font-size: 12.5px; }
+    th, td { padding: 8px 10px; }
+
+    .callout { padding: 12px 14px; font-size: 13px; }
+
+    pre code { font-size: 11.5px; }
+    code:not(pre code) { font-size: 11.5px; }
+  }
+
+  /* ── Exam question numbering ── */
+  .exam-questions ol li::before {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  }
+
+  .footnote {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 60px;
+    padding: 20px 24px;
+    border-top: none;
+    text-align: center;
+    background: linear-gradient(135deg, #0f172a, #1a1040);
+    border-radius: 12px;
+    color: #475569;
+  }
+</style>
+</head>
+<body>
+
+<!-- Hamburger toggle (mobile) -->
+<button id="menu-toggle" aria-label="Toggle menu">
+  <span></span><span></span><span></span>
+</button>
+<div id="sidebar-overlay"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════ SIDEBAR -->
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <div class="course-title">PGD 2026</div>
+    <div class="course-name">Deep Learning Study Reference</div>
+  </div>
+
+  <div class="toc-section">
+    <div class="toc-section-label">Overview</div>
+    <a href="#overview" class="toc-link">1 · Course Progression</a>
+  </div>
+
+  <div class="toc-section">
+    <div class="toc-section-label">Weeks</div>
+    <a href="#w12" class="toc-link"><span class="week-dot" style="background:var(--w12)"></span>2 · Week 1 &amp; 2 — Perceptron</a>
+    <a href="#w12-perceptron" class="toc-link sub">Perceptron (sklearn)</a>
+    <a href="#w12-fashion" class="toc-link sub">Fashion MNIST ANN</a>
+
+    <a href="#w3" class="toc-link"><span class="week-dot" style="background:var(--w3)"></span>3 · Week 3 — CNNs</a>
+    <a href="#w3-basic" class="toc-link sub">Baseline CNN / Overfitting</a>
+    <a href="#w3-overfit" class="toc-link sub">Solving Overfitting</a>
+    <a href="#w3-underfit" class="toc-link sub">Solving Underfitting</a>
+    <a href="#w3-layers" class="toc-link sub">Layer Explanations</a>
+
+    <a href="#w4" class="toc-link"><span class="week-dot" style="background:var(--w4)"></span>4 · Week 4 — Transfer Learning</a>
+    <a href="#w4-models" class="toc-link sub">Pre-trained Models</a>
+
+    <a href="#w5" class="toc-link"><span class="week-dot" style="background:var(--w5)"></span>5 · Week 5 — Functional API</a>
+    <a href="#w5-pretrained" class="toc-link sub">Direct Inference</a>
+    <a href="#w5-functional" class="toc-link sub">Functional API</a>
+
+    <a href="#w6" class="toc-link"><span class="week-dot" style="background:var(--w6)"></span>6 · Week 6 — Multi-output</a>
+    <a href="#w6-setup" class="toc-link sub">Problem Setup</a>
+    <a href="#w6-pipeline" class="toc-link sub">tf.data Pipeline</a>
+    <a href="#w6-arch" class="toc-link sub">Architecture</a>
+    <a href="#w6-finetune" class="toc-link sub">Fine-tuning</a>
+
+    <a href="#w7" class="toc-link"><span class="week-dot" style="background:var(--w7)"></span>7 · Week 7 — OpenCV</a>
+    <a href="#w7-basics" class="toc-link sub">Image Basics</a>
+    <a href="#w7-edges" class="toc-link sub">Edge Detection</a>
+    <a href="#w7-face" class="toc-link sub">Face Detection</a>
+
+    <a href="#w8" class="toc-link"><span class="week-dot" style="background:var(--w8)"></span>8 · Week 8 — YOLO</a>
+    <a href="#w8-yolo" class="toc-link sub">8.1 · YOLOv8 Concepts</a>
+    <a href="#w8-project" class="toc-link sub">8.2 · Weapon Detection</a>
+    <a href="#w8-concepts" class="toc-link sub">8.3 · Key YOLO Concepts</a>
+    <a href="#w8-metrics" class="toc-link sub">8.4 · Evaluation Metrics</a>
+    <a href="#w8-roboflow" class="toc-link sub">8.5 · Roboflow Integration</a>
+    <a href="#w8-deploy" class="toc-link sub">8.6 · HF Deployment</a>
+    <a href="#w8-ethics" class="toc-link sub">8.7 · Ethical Considerations</a>
+    <a href="#w8-report" class="toc-link sub">8.8 · Report Questions</a>
+  </div>
+
+  <div class="toc-section">
+    <div class="toc-section-label">Reference</div>
+    <a href="#core" class="toc-link">9 · Core Concepts</a>
+    <a href="#glossary" class="toc-link">10 · Glossary</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════ MAIN -->
+<main id="main">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>PGD Deep Learning 2026<br>Course Study Reference</h1>
+    <p>Comprehensive reference for all 8 weeks — perceptrons to YOLOv8. Use this for exam prep, concept review, and code recall.</p>
+    <div class="badge-row">
+      <span class="badge" style="background:rgba(129,140,248,0.3);color:#c7d2fe;border-color:rgba(129,140,248,0.4);">Week 1&amp;2 · ANN</span>
+      <span class="badge" style="background:rgba(251,191,36,0.3);color:#fef08a;border-color:rgba(251,191,36,0.4);">Week 3 · CNN</span>
+      <span class="badge" style="background:rgba(52,211,153,0.3);color:#a7f3d0;border-color:rgba(52,211,153,0.4);">Week 4 · Transfer Learning</span>
+      <span class="badge" style="background:rgba(96,165,250,0.3);color:#bfdbfe;border-color:rgba(96,165,250,0.4);">Week 5 · Functional API</span>
+      <span class="badge" style="background:rgba(244,114,182,0.3);color:#fbcfe8;border-color:rgba(244,114,182,0.4);">Week 6 · Multi-output</span>
+      <span class="badge" style="background:rgba(45,212,191,0.3);color:#99f6e4;border-color:rgba(45,212,191,0.4);">Week 7 · OpenCV</span>
+      <span class="badge" style="background:rgba(251,113,133,0.3);color:#fecaca;border-color:rgba(251,113,133,0.4);">Week 8 · YOLO</span>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 1 -->
+  <h2 id="overview">1 · Course Progression Overview</h2>
+
+  <div class="progress-flow">
+    <div class="progress-step">
+      <div class="wk" style="color:var(--w12)">W1 &amp; 2</div>
+      <div class="topic">Perceptron → Fashion MNIST ANN</div>
+    </div>
+    <div class="progress-step">
+      <div class="wk" style="color:var(--w3)">W3</div>
+      <div class="topic">CNN → Overfitting → Underfitting solutions</div>
+    </div>
+    <div class="progress-step">
+      <div class="wk" style="color:var(--w4)">W4</div>
+      <div class="topic">Transfer Learning theory</div>
+    </div>
+    <div class="progress-step">
+      <div class="wk" style="color:var(--w5)">W5</div>
+      <div class="topic">Pre-trained Models + Functional API</div>
+    </div>
+    <div class="progress-step">
+      <div class="wk" style="color:var(--w6)">W6</div>
+      <div class="topic">Multi-output: Age + Gender</div>
+    </div>
+    <div class="progress-step">
+      <div class="wk" style="color:var(--w7)">W7</div>
+      <div class="topic">OpenCV — edges, contours, face detection</div>
+    </div>
+    <div class="progress-step">
+      <div class="wk" style="color:var(--w8)">W8</div>
+      <div class="topic">YOLOv8 + Roboflow + Gradio deploy</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Learning arc</div>
+    Simple linear models → deep CNNs → leveraging pre-trained models → classical CV → production deployment.
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 2 -->
+  <h2 id="w12"><span class="week-badge" style="background:#eef2ff;color:var(--w12)">Week 1 &amp; 2</span> Perceptron &amp; Intro to Deep Learning</h2>
+
+  <ul class="file-list">
+    <li>Week 1 &amp; 2/Perceptron_Class1.ipynb</li>
+    <li>Week 1 &amp; 2/Fashion_MNIST_Upload_Predict.ipynb</li>
+    <li>Week 1 &amp; 2/Introduction Deep learning.pdf</li>
+    <li>Week 1 &amp; 2/data/placement.csv</li>
+  </ul>
+
+  <h3 id="w12-perceptron">2.1 The Perceptron (sklearn)</h3>
+
+  <p><strong>Dataset:</strong> <code>placement.csv</code> — 100 students, features: <code>cgpa</code> and <code>resume_score</code>, label: <code>placed</code> (0 or 1).</p>
+
+  <p><strong>What a Perceptron is:</strong> The simplest neural unit. It takes inputs, multiplies each by a weight, sums them up, and applies a step activation function to produce a binary output.</p>
+
+  <pre><code class="language-python">Output = 1  if  (w1*cgpa + w2*resume_score + bias) >= 0
+       = 0  otherwise</code></pre>
+
+  <pre><code class="language-python">from sklearn.linear_model import Perceptron
+model = Perceptron()
+model.fit(X_train, y_train)
+model.score(X_test, y_test)      # accuracy
+model.coef_                      # weights  → [34.91, -31.31]
+model.intercept_                 # bias     → [-15.]</code></pre>
+
+  <div class="result-grid">
+    <div class="result-card"><div class="val">80%</div><div class="lbl">Train Accuracy</div></div>
+    <div class="result-card"><div class="val">75.7%</div><div class="lbl">Test Accuracy</div></div>
+    <div class="result-card"><div class="val">70/30</div><div class="lbl">Test / Train split</div></div>
+    <div class="result-card"><div class="val">2</div><div class="lbl">Features</div></div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Key concept</div>
+    Decision boundary is a <strong>straight line</strong> — a perceptron can only solve <strong>linearly separable</strong> problems.
+    It fails on XOR because XOR is not linearly separable → this is why we need multi-layer networks.
+  </div>
+
+  <p><strong>Data split used:</strong> <code>test_size=0.7</code> (70% test, 30% train) — intentionally large test set to demonstrate concept.
+  Visualization: <code>mlxtend.plotting.plot_decision_regions</code></p>
+
+  <h3 id="w12-fashion">2.2 Fashion MNIST — First Neural Network (Keras/TensorFlow)</h3>
+
+  <p><strong>Dataset:</strong> Fashion MNIST — 60,000 training images, 10,000 test images. Each image is 28×28 grayscale, 10 classes.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Index</th><th>Class</th><th>Index</th><th>Class</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td>T-shirt/top</td><td>5</td><td>Sandal</td></tr>
+        <tr><td>1</td><td>Trouser</td><td>6</td><td>Shirt</td></tr>
+        <tr><td>2</td><td>Pullover</td><td>7</td><td>Sneaker</td></tr>
+        <tr><td>3</td><td>Dress</td><td>8</td><td>Bag</td></tr>
+        <tr><td>4</td><td>Coat</td><td>9</td><td>Ankle boot</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Architecture — Sequential ANN</h4>
+  <pre><code class="language-python">model = tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(),           # 28x28 → 784 (flattens 2D to 1D)
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dense(10, activation='softmax')  # 10-class output
+])
+
+model.compile(
+    optimizer=tf.optimizers.Adam(),
+    loss='sparse_categorical_crossentropy',  # integer labels (not one-hot)
+    metrics=['accuracy']
+)
+model.fit(training_images, training_labels, epochs=100)</code></pre>
+
+  <h4>Normalization</h4>
+  <pre><code class="language-python">training_images = training_images / 255.0   # pixel range 0-255 → 0-1
+test_images = test_images / 255.0</code></pre>
+  <p><em>Why:</em> Neural networks train faster and more stably when inputs are in a small range.</p>
+
+  <div class="result-grid">
+    <div class="result-card"><div class="val">84.64%</div><div class="lbl">Test Accuracy</div></div>
+    <div class="result-card"><div class="val">0.43</div><div class="lbl">Test Loss</div></div>
+    <div class="result-card"><div class="val">100</div><div class="lbl">Epochs</div></div>
+    <div class="result-card"><div class="val">~90%+</div><div class="lbl">Train Accuracy</div></div>
+  </div>
+
+  <div class="callout exam">
+    <div class="callout-label">Exam note</div>
+    Exact test accuracy is <strong>84.64%</strong> — from <code>model.evaluate()</code> output: <code>[0.42982..., 0.8464...]</code>. Training acc ~90%+ indicates slight overfitting.
+  </div>
+
+  <h4>Prediction Code</h4>
+  <pre><code class="language-python">img = Image.open(file_name).convert("L")   # grayscale
+img = img.resize((28, 28))
+img = ImageOps.invert(img)                 # Fashion MNIST has dark background
+img_array = np.array(img) / 255.0
+img_input = np.expand_dims(img_array, axis=0)  # adds batch dimension
+prediction = model.predict(img_input)
+np.argmax(prediction[0])   # index of highest probability = predicted class</code></pre>
+
+  <h3>2.3 Key Diagrams (Week 1 &amp; 2 Images)</h3>
+
+  <ul class="file-list">
+    <li>perceptron.png — basic perceptron structure (inputs → weights → summation → activation → output)</li>
+    <li>MLP.png — multi-layer perceptron architecture</li>
+    <li>perceptron_model.png — full input → weights → summation → activation → output diagram</li>
+    <li>donation.png / donation 2.png — placement prediction problem illustration</li>
+    <li>trainable parameter MLP.png — shows how parameters are counted in an MLP</li>
+    <li>perceptron trick.png — how weights update during training</li>
+  </ul>
+
+  <!-- ─────────────────────────────────────────── SECTION 3 -->
+  <h2 id="w3"><span class="week-badge" style="background:#fffbeb;color:var(--w3)">Week 3</span> Convolutional Neural Networks (CNNs)</h2>
+
+  <ul class="file-list">
+    <li>Week 3/cat_Dog_Classifier.ipynb — basic CNN, introduces overfitting</li>
+    <li>Week 3/cat_dog_basic_cnn_overfitting_solution_notes.ipynb — how to fix overfitting</li>
+    <li>Week 3/cat_dog_basic_cnn_underfitting_solution_notes.ipynb — how to fix underfitting</li>
+    <li>Week 3/CNN Detailed.png — architecture diagram</li>
+    <li>Week 3/cat_dog_overfitting_lecture_with_code.pdf — lecture PDF</li>
+  </ul>
+
+  <p><strong>Dataset:</strong> Microsoft Cats vs Dogs (Kaggle: <code>shaunthesheep/microsoft-catsvsdogs-dataset</code>)</p>
+  <ul>
+    <li>12,501 Cat images + 12,501 Dog images</li>
+    <li>80% train (20,000), 20% validation (4,998) after split</li>
+    <li>Images resized to 150×150, normalized to 0–1</li>
+  </ul>
+
+  <h3 id="w3-basic">3.1 Basic CNN (Baseline — Overfitting Example)</h3>
+
+  <pre><code class="language-python">model = Sequential([
+    Conv2D(32, (3,3), activation="relu", input_shape=(150,150,3)),
+    MaxPooling2D(2,2),
+
+    Conv2D(64, (3,3), activation="relu"),
+    MaxPooling2D(2,2),
+
+    Conv2D(128, (3,3), activation="relu"),
+    MaxPooling2D(2,2),
+
+    Flatten(),
+
+    Dense(128, activation="relu"),
+    Dropout(0.25),
+
+    Dense(64, activation="relu"),
+    Dropout(0.25),
+
+    Dense(1, activation="sigmoid")  # binary output: Cat=0, Dog=1
+])
+
+model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])</code></pre>
+
+  <div class="result-grid">
+    <div class="result-card"><div class="val">98.8%</div><div class="lbl">Train Accuracy</div></div>
+    <div class="result-card"><div class="val">83.9%</div><div class="lbl">Val Accuracy</div></div>
+    <div class="result-card"><div class="val">~4.8M</div><div class="lbl">Parameters</div></div>
+    <div class="result-card"><div class="val">20</div><div class="lbl">Epochs</div></div>
+  </div>
+
+  <div class="callout red">
+    <div class="callout-label">Overfitting detected</div>
+    Train 98.8% vs Val 83.9% — large gap = model memorizing training data, not generalizing.
+  </div>
+
+  <div class="callout exam">
+    <div class="callout-label">Critical — class_indices</div>
+    <pre style="margin:8px 0 0;font-size:12.5px;border-radius:6px;"><code class="language-python">print(train_data.class_indices)   # → {'Cat': 0, 'Dog': 1}</code></pre>
+    <p style="margin-top:8px;">The model outputs a single sigmoid value (0 to 1):<br>
+    • Score &gt; 0.5 → <strong>Dog</strong> (class 1)<br>
+    • Score ≤ 0.5 → <strong>Cat</strong> (class 0)</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Reading training graphs</div>
+    <ul>
+      <li><strong>Train acc &gt;&gt; Val acc</strong> → Overfitting</li>
+      <li><strong>Both acc low</strong> → Underfitting</li>
+      <li><strong>Both acc similar and high</strong> → Good fit</li>
+    </ul>
+  </div>
+
+  <h3 id="w3-overfit">3.2 Solving Overfitting</h3>
+
+  <p><strong>Definition:</strong> Model memorizes training data instead of learning general patterns. High train accuracy, low val accuracy.<br>
+  <em>Analogy: A student who memorizes textbook answers but fails on new exam questions.</em></p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Technique</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Data Augmentation</strong></td><td>Creates varied versions of images so model can't memorize specific pixels</td></tr>
+        <tr><td><strong>Dropout</strong></td><td>Randomly disables neurons during training — prevents co-adaptation</td></tr>
+        <tr><td><strong>BatchNormalization</strong></td><td>Normalizes layer outputs — stabilizes and speeds up training</td></tr>
+        <tr><td><strong>L2 Regularization</strong></td><td>Penalizes large weights — prevents overly complex learned functions</td></tr>
+        <tr><td><strong>GlobalAveragePooling2D</strong></td><td>Replaces Flatten — reduces parameters, improves generalization</td></tr>
+        <tr><td><strong>EarlyStopping</strong></td><td>Stops training when val_loss stops improving</td></tr>
+        <tr><td><strong>ReduceLROnPlateau</strong></td><td>Reduces learning rate when training gets stuck</td></tr>
+        <tr><td><strong>ModelCheckpoint</strong></td><td>Saves the best model based on val_accuracy</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Data Augmentation Parameters</h4>
+  <pre><code class="language-python">ImageDataGenerator(
+    rescale=1./255,
+    rotation_range=25,          # randomly rotate up to 25 degrees
+    width_shift_range=0.15,     # shift image left/right
+    height_shift_range=0.15,    # shift image up/down
+    shear_range=0.15,           # shear transformation
+    zoom_range=0.2,             # random zoom
+    horizontal_flip=True,       # flip left-right
+    fill_mode="nearest"         # fill missing pixels after transform
+)</code></pre>
+
+  <h4>Improved CNN (Overfitting Solution)</h4>
+  <pre><code class="language-python">Sequential([
+    Conv2D(32, (3,3), activation="relu", padding="same",
+           kernel_regularizer=l2(0.001), input_shape=(150,150,3)),
+    BatchNormalization(), MaxPooling2D(2,2), Dropout(0.25),
+
+    Conv2D(64, (3,3), activation="relu", padding="same", kernel_regularizer=l2(0.001)),
+    BatchNormalization(), MaxPooling2D(2,2), Dropout(0.30),
+
+    Conv2D(128, (3,3), activation="relu", padding="same", kernel_regularizer=l2(0.001)),
+    BatchNormalization(), MaxPooling2D(2,2), Dropout(0.35),
+
+    Conv2D(256, (3,3), activation="relu", padding="same", kernel_regularizer=l2(0.001)),
+    BatchNormalization(), MaxPooling2D(2,2), Dropout(0.40),
+
+    GlobalAveragePooling2D(),   # replaces Flatten — drastically fewer parameters
+
+    Dense(128, activation="relu", kernel_regularizer=l2(0.001)),
+    Dropout(0.50),
+    Dense(1, activation="sigmoid")
+])
+
+# Callbacks:
+EarlyStopping(monitor="val_loss", patience=5, restore_best_weights=True)
+ReduceLROnPlateau(monitor="val_loss", factor=0.3, patience=3, min_lr=1e-7)
+ModelCheckpoint("best_model.h5", monitor="val_accuracy", save_best_only=True, mode="max")</code></pre>
+
+  <h3 id="w3-underfit">3.3 Solving Underfitting</h3>
+
+  <p><strong>Definition:</strong> Model fails to learn enough — performs poorly on BOTH train and validation data.<br>
+  <em>Analogy: A student who did not study at all — performs poorly everywhere.</em></p>
+
+  <p><strong>Causes:</strong> Too much Dropout, too strong L2 regularization, too heavy data augmentation, not enough model capacity, learning rate too low or too high.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Problem</th><th>Train Acc</th><th>Val Acc</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Underfitting</strong></td><td>55–65%</td><td>54–63%</td><td>Model too weak</td></tr>
+        <tr><td><strong>Good fit</strong></td><td>85%</td><td>82–85%</td><td>Balanced</td></tr>
+        <tr><td><strong>Overfitting</strong></td><td>97%+</td><td>72–83%</td><td>Model memorized data</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Previous problem</th><th>Fix applied</th></tr></thead>
+      <tbody>
+        <tr><td>Too much Dropout</td><td>Moderate Dropout (0.4)</td></tr>
+        <tr><td>Strong L2 (0.001)</td><td>Light L2 (0.0001)</td></tr>
+        <tr><td>GlobalAveragePooling2D</td><td>Flatten — gives Dense layer more information</td></tr>
+        <tr><td>Heavy augmentation</td><td>Moderate augmentation</td></tr>
+        <tr><td>Dense(128)</td><td>Dense(256) — more learning capacity</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Balanced CNN Code</h4>
+  <pre><code class="language-python">Sequential([
+    Conv2D(32, (3,3), activation="relu", padding="same", input_shape=(150,150,3)),
+    BatchNormalization(), MaxPooling2D(2,2),
+
+    Conv2D(64, (3,3), activation="relu", padding="same"),
+    BatchNormalization(), MaxPooling2D(2,2),
+
+    Conv2D(128, (3,3), activation="relu", padding="same"),
+    BatchNormalization(), MaxPooling2D(2,2),
+
+    Conv2D(128, (3,3), activation="relu", padding="same"),
+    BatchNormalization(), MaxPooling2D(2,2),
+
+    Flatten(),                                       # NOT GlobalAveragePooling2D
+
+    Dense(256, activation="relu", kernel_regularizer=l2(0.0001)),
+    Dropout(0.4),                                    # moderate, not 0.5+
+
+    Dense(1, activation="sigmoid")
+])
+# Adam(learning_rate=0.0001), patience=7 in EarlyStopping (give model more time)</code></pre>
+
+  <pre><code class="language-python"># Prediction with uncertainty zone:
+if score >= 0.65:   print("Dog")
+elif score <= 0.35: print("Cat")
+else:               print("Uncertain")  # avoids overconfident wrong answers</code></pre>
+
+  <h3 id="w3-layers">3.4 How CNN Layers Work</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Layer</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Conv2D</strong></td><td>Applies learnable filters to extract features (edges, textures, shapes). Each filter produces a feature map.</td></tr>
+        <tr><td><strong>MaxPooling2D(2,2)</strong></td><td>Reduces spatial dimensions by half — takes max value in each 2×2 window. Reduces computation, provides spatial invariance.</td></tr>
+        <tr><td><strong>Flatten</strong></td><td>Converts 3D feature maps to 1D vector for Dense layers.</td></tr>
+        <tr><td><strong>GlobalAveragePooling2D</strong></td><td>Takes average of entire feature map per channel — far fewer parameters than Flatten, better generalization.</td></tr>
+        <tr><td><strong>Dense</strong></td><td>Fully connected layer — every input connected to every output neuron.</td></tr>
+        <tr><td><strong>Dropout(p)</strong></td><td>During training, randomly sets p fraction of neurons to 0 each batch.</td></tr>
+        <tr><td><strong>BatchNormalization</strong></td><td>Normalizes output of previous layer per mini-batch.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Output size formula</div>
+    After Conv2D: <code>(input_size - kernel_size + 1)</code> without padding, or same size with <code>padding="same"</code>.
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 4 -->
+  <h2 id="w4"><span class="week-badge" style="background:#ecfdf5;color:var(--w4)">Week 4</span> Transfer Learning Concepts</h2>
+
+  <ul class="file-list">
+    <li>Week 4/Transfer_Learning_Handwritten_Notes.pdf — core theory</li>
+    <li>Week 4/Intro Pre_trained_and_transfer_learning.png</li>
+    <li>Week 4/Detailed PT and TF.png — PyTorch vs TensorFlow comparison</li>
+  </ul>
+
+  <h3>4.1 What is Transfer Learning?</h3>
+
+  <p><strong>Definition:</strong> Taking a model trained on a large dataset (e.g., ImageNet with 1.2M images, 1000 classes) and reusing its learned weights for a new, related task.</p>
+
+  <div class="callout">
+    <div class="callout-label">Why it works</div>
+    Lower layers of a CNN learn <strong>general features</strong> (edges, curves, textures) that are useful across many image tasks. Only higher layers learn task-specific features.
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Strategy</th><th>What you do</th><th>When to use</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Feature Extraction</strong></td><td>Freeze all pre-trained layers, only train new top layers</td><td>Small dataset, similar domain</td></tr>
+        <tr><td><strong>Fine-tuning</strong></td><td>Unfreeze last few layers + retrain with very small LR</td><td>Medium dataset, want better performance</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout exam">
+    <div class="callout-label">Exam note — key parameters</div>
+    <strong><code>include_top=False</code></strong> — loads the pre-trained model WITHOUT its final 1000-class classifier. You add your own output layers on top.<br><br>
+    <strong><code>base_model.trainable = False</code></strong> — freezes all pre-trained weights during initial training.
+  </div>
+
+  <h3 id="w4-models">4.2 Common Pre-trained Models</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Model</th><th>Input Size</th><th>Params</th><th>Key Trait</th></tr></thead>
+      <tbody>
+        <tr><td><strong>VGG16</strong></td><td>224×224</td><td>138M</td><td>Simple, very large</td></tr>
+        <tr><td><strong>ResNet50</strong></td><td>224×224</td><td>25M</td><td>Residual connections, deep</td></tr>
+        <tr><td><strong>MobileNetV2</strong></td><td>224×224</td><td>3.4M</td><td>Lightweight, for mobile/edge</td></tr>
+        <tr><td><strong>EfficientNetB0</strong></td><td>224×224</td><td>5.3M</td><td>Best accuracy/efficiency balance</td></tr>
+        <tr><td><strong>MobileNetV3</strong></td><td>224×224</td><td>5.4M</td><td>Diagrams only — not used in code</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>All models are available in <code>keras.applications</code>. ImageNet = 1.2 million images, 1000 classes — used to pre-train all models above.</p>
+
+  <!-- ─────────────────────────────────────────── SECTION 5 -->
+  <h2 id="w5"><span class="week-badge" style="background:#eff6ff;color:var(--w5)">Week 5</span> Pre-trained Models &amp; Functional API</h2>
+
+  <ul class="file-list">
+    <li>Week 5/Pretrained_Model.ipynb</li>
+    <li>Week 5/functional_api_demo.ipynb</li>
+  </ul>
+
+  <h3 id="w5-pretrained">5.1 Using Pre-trained Models (Direct Inference)</h3>
+
+  <pre><code class="language-python"># ResNet50 for image classification (complete model, 1000-class head)
+from keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
+
+model = ResNet50(weights='imagenet')   # loads complete model
+
+img = keras.utils.load_img(img_path, target_size=(224, 224))
+x = keras.utils.img_to_array(img)
+x = np.expand_dims(x, axis=0)         # shape: (1, 224, 224, 3)
+x = preprocess_input(x)               # model-specific normalization
+
+preds = model.predict(x)
+results = decode_predictions(preds, top=5)[0]   # (class_id, class_name, probability)</code></pre>
+
+  <div class="callout green">
+    <div class="callout-label">Example result</div>
+    <code>German_shepherd: 93.9%</code>
+  </div>
+
+  <div class="callout exam">
+    <div class="callout-label">Exam note — each model has its own preprocess_input</div>
+    Always use the matching one:<br>
+    <code>from keras.applications.resnet50 import preprocess_input</code><br>
+    <code>from keras.applications.mobilenet_v2 import preprocess_input</code><br>
+    <code>from keras.applications.efficientnet import preprocess_input</code>
+  </div>
+
+  <h3 id="w5-functional">5.2 Keras Functional API</h3>
+
+  <p><strong>Why use it:</strong> The Sequential API only allows one input and one output, one path. The Functional API allows: multiple inputs, multiple outputs, shared layers, branching (skip connections like ResNet).</p>
+
+  <pre><code class="language-python">from keras.models import Model
+from keras.layers import Input, Dense
+
+x = Input(shape=(3,))                           # define input tensor
+hidden1 = Dense(128, activation='relu')(x)      # call layer as function
+hidden2 = Dense(64, activation='relu')(hidden1)
+
+output1 = Dense(1, activation='linear')(hidden2)    # regression head
+output2 = Dense(1, activation='sigmoid')(hidden2)   # classification head
+
+model = Model(inputs=x, outputs=[output1, output2])</code></pre>
+
+  <div class="callout">
+    <div class="callout-label">Key insight</div>
+    Each layer is <strong>called as a function on a tensor</strong>, returning a new tensor. <code>Model()</code> just defines the computation graph.
+    <br><br>Total params example: Input(3) → Dense(128) → Dense(64) → two Dense(1) = <strong>8,898 params</strong>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 6 -->
+  <h2 id="w6"><span class="week-badge" style="background:#fdf2f8;color:var(--w6)">Week 6</span> Age &amp; Gender Prediction (Multi-output)</h2>
+
+  <ul class="file-list">
+    <li>WEEK 6/Age_Gender_Prediction_From_Scratch_Explained.ipynb — MobileNetV2 backbone</li>
+    <li>WEEK 6/Age_Gender_Prediction_ResNet50_From_Scratch_Explained.ipynb — ResNet50 backbone</li>
+  </ul>
+
+  <h3 id="w6-setup">6.1 Problem Setup</h3>
+
+  <p><strong>Dataset:</strong> UTKFace (Kaggle: <code>jangedoo/utkface-new</code>)<br>
+  Filename format: <code>age_gender_race_datetime.jpg</code><br>
+  Example: <code>25_0_0_201701.jpg</code> → Age=25, Gender=0 (Male)</p>
+
+  <p><strong>Gender labels:</strong> 0 = Male, 1 = Female</p>
+
+  <p><strong>Two simultaneous tasks:</strong></p>
+  <ul>
+    <li><strong>Age prediction</strong> → Regression (output: single number)</li>
+    <li><strong>Gender prediction</strong> → Binary Classification (output: probability 0–1)</li>
+  </ul>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Notebook</th><th>Train</th><th>Val</th><th>Test</th><th>Code</th></tr></thead>
+      <tbody>
+        <tr><td><strong>MobileNetV2</strong></td><td>70%</td><td>15%</td><td>15%</td><td><code>test_size=0.30</code> then <code>test_size=0.50</code> on remainder</td></tr>
+        <tr><td><strong>ResNet50</strong></td><td>80%</td><td>20%</td><td>—</td><td><code>test_size=0.20</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Both use <code>stratify=df["gender"]</code> to keep equal Male/Female ratio in each split.</p>
+
+  <h3 id="w6-pipeline">6.2 Data Pipeline — tf.data (Modern Approach)</h3>
+
+  <div class="callout red">
+    <div class="callout-label">Why not ImageDataGenerator?</div>
+    The old generator method causes a <code>TypeError</code> with dictionary-based multi-output models in newer TensorFlow. Use <code>tf.data</code> instead.
+  </div>
+
+  <pre><code class="language-python">def load_image_and_labels(filepath, age, gender):
+    image = tf.io.read_file(filepath)
+    image = tf.image.decode_jpeg(image, channels=3)
+    image = tf.image.resize(image, (224, 224))
+    image = preprocess_input(image)
+    labels = {
+        "age_output": tf.cast(age, tf.float32),
+        "gender_output": tf.cast(gender, tf.float32)
+    }
+    return image, labels
+
+dataset = tf.data.Dataset.from_tensor_slices((filepaths, ages, genders))
+dataset = dataset.map(load_image_and_labels, num_parallel_calls=tf.data.AUTOTUNE)
+dataset = dataset.batch(32).prefetch(tf.data.AUTOTUNE)</code></pre>
+
+  <h3 id="w6-arch">6.3 Multi-output Model Architecture</h3>
+
+  <pre><code class="language-python"># Step 1 — Data augmentation (applied during training only)
+data_augmentation = tf.keras.Sequential([
+    RandomFlip("horizontal"),    # randomly flip image left-right
+    RandomRotation(0.05),        # rotate up to 5%
+    RandomZoom(0.10)             # zoom in/out up to 10%
+], name="data_augmentation")
+
+# Step 2 — MobileNetV2 version
+inputs = Input(shape=(224, 224, 3))
+x = data_augmentation(inputs)   # augmentation is part of the model graph
+
+base_model = MobileNetV2(weights="imagenet", include_top=False, input_tensor=x)
+base_model.trainable = False    # freeze during initial training
+
+x = base_model.output
+x = GlobalAveragePooling2D()(x)
+x = Dense(256, activation="relu")(x)
+x = Dropout(0.30)(x)
+
+age_output    = Dense(1, activation="linear",  name="age_output")(x)   # regression
+gender_output = Dense(1, activation="sigmoid", name="gender_output")(x) # classification
+
+model = Model(inputs=inputs, outputs=[age_output, gender_output])</code></pre>
+
+  <pre><code class="language-python"># ResNet50 version — same structure but two Dense hidden layers before heads
+base_model = ResNet50(weights="imagenet", include_top=False, input_shape=(224,224,3))
+base_model.trainable = False
+
+inputs = layers.Input(shape=(224, 224, 3))
+x = base_model(inputs, training=False)
+x = layers.GlobalAveragePooling2D()(x)
+x = layers.Dense(512, activation="relu")(x)
+x = layers.Dropout(0.4)(x)
+x = layers.Dense(256, activation="relu")(x)
+x = layers.Dropout(0.3)(x)
+
+age_output    = layers.Dense(1, activation="linear",  name="age")(x)
+gender_output = layers.Dense(1, activation="sigmoid", name="gender")(x)
+
+model = Model(inputs=inputs, outputs={"age": age_output, "gender": gender_output})</code></pre>
+
+  <div class="callout exam">
+    <div class="callout-label">Critical — output key names differ between notebooks</div>
+    <div class="table-wrap" style="margin-top:10px;">
+      <table>
+        <thead><tr><th>Notebook</th><th>Age key</th><th>Gender key</th></tr></thead>
+        <tbody>
+          <tr><td><strong>MobileNetV2</strong></td><td><code>"age_output"</code></td><td><code>"gender_output"</code></td></tr>
+          <tr><td><strong>ResNet50</strong></td><td><code>"age"</code></td><td><code>"gender"</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    The key names must exactly match the <code>name=</code> argument in the output Dense layers.
+  </div>
+
+  <h4>Compiling Multi-output Model</h4>
+  <pre><code class="language-python">model.compile(
+    optimizer=Adam(learning_rate=0.001),
+    loss={
+        "age_output": "mae",                   # Mean Absolute Error for regression
+        "gender_output": "binary_crossentropy" # for classification
+    },
+    metrics={
+        "age_output": ["mae"],
+        "gender_output": ["accuracy"]
+    },
+    loss_weights={
+        "age_output": 1.0,
+        "gender_output": 5.0    # weight gender higher so it's not ignored
+    }
+)</code></pre>
+
+  <div class="callout">
+    <div class="callout-label">Why loss_weights?</div>
+    Age loss (in years) is numerically larger than binary crossentropy. Without weighting, gender learning gets ignored. Setting gender_output weight to 5.0 balances this.
+  </div>
+
+  <h3 id="w6-finetune">6.4 Fine-tuning Process</h3>
+
+  <pre><code class="language-python"># Phase 1: Freeze base model → train only top layers
+model.fit(train_ds, epochs=10, ...)   # LR=0.001
+
+# Phase 2 (Fine-tuning): Unfreeze last 30 layers → retrain with very small LR
+base_model.trainable = True
+for layer in base_model.layers[:-30]:
+    layer.trainable = False           # still freeze earlier layers
+
+model.compile(optimizer=Adam(learning_rate=1e-5), ...)  # very small LR
+model.fit(train_ds, epochs=5, ...)</code></pre>
+
+  <div class="callout">
+    <div class="callout-label">Why small LR for fine-tuning?</div>
+    Pre-trained weights are already good — we want to gently adjust them, not destroy them with large updates.
+  </div>
+
+  <h4>Prediction Function</h4>
+  <pre><code class="language-python">def predict_age_gender(image_path):
+    img = load_img(image_path, target_size=(224, 224))
+    img_array = img_to_array(img)
+    img_array = preprocess_input(img_array)
+    img_array = np.expand_dims(img_array, axis=0)
+
+    age_pred, gender_pred = model.predict(img_array)
+
+    predicted_age    = round(float(age_pred[0][0]))
+    predicted_gender = "Female" if float(gender_pred[0][0]) >= 0.5 else "Male"</code></pre>
+
+  <!-- ─────────────────────────────────────────── SECTION 7 -->
+  <h2 id="w7"><span class="week-badge" style="background:#f0fdfa;color:var(--w7)">Week 7</span> Computer Vision with OpenCV</h2>
+
+  <ul class="file-list">
+    <li>WEEK 7/codes/Lab_Task_1_Image_Basics_and_Preprocessing_OpenCV.ipynb</li>
+    <li>WEEK 7/codes/Lab_Task_2_Edge_Detection_and_Contours.ipynb</li>
+    <li>WEEK 7/codes/Lab_Task_3_Face_Detection_OpenCV_Haar_Cascade.ipynb</li>
+    <li>WEEK 7/lectures/ — 10 lecture diagrams</li>
+  </ul>
+
+  <h3 id="w7-basics">7.1 Lab Task 1 — Image Basics and Preprocessing</h3>
+
+  <div class="callout red">
+    <div class="callout-label">Critical — BGR vs RGB</div>
+    OpenCV reads images in <strong>BGR</strong> order (Blue-Green-Red), NOT the standard RGB.
+    Matplotlib expects <strong>RGB</strong>. Always convert before displaying:
+    <pre style="margin-top:8px;font-size:12.5px;border-radius:6px;"><code class="language-python">img_bgr = cv2.imread("image.jpg")        # BGR
+img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)   # convert for matplotlib</code></pre>
+  </div>
+
+  <pre><code class="language-python"># Shape: (height, width, channels)
+print(img.shape)    # e.g., (480, 640, 3)
+
+# Grayscale conversion
+gray = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2GRAY)   # shape (H, W)
+
+# Resize — NOTE: cv2.resize takes (width, height) — OPPOSITE of shape!
+resized = cv2.resize(img_rgb, (300, 300))   # (width, height)
+
+# Crop — numpy slicing: [rows(height), columns(width)]
+cropped = img_rgb[y1:y2, x1:x2]
+
+# Flip codes
+cv2.flip(img, 1)   # 1 = horizontal flip (left-right)
+cv2.flip(img, 0)   # 0 = vertical flip (up-down)
+cv2.flip(img, -1)  # -1 = both axes
+
+# Gaussian Blur — kernel must be ODD numbers
+blurred = cv2.GaussianBlur(img, (9, 9), 0)
+
+# Brightness & Contrast:  new_pixel = alpha * pixel + beta
+result = cv2.convertScaleAbs(img, alpha=1.4, beta=40)
+# alpha > 1 = more contrast, beta > 0 = brighter
+
+# Save (convert back to BGR first)
+cv2.imwrite("output.jpg", cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR))</code></pre>
+
+  <div class="callout exam">
+    <div class="callout-label">Exam — Lab Task 1 Questions</div>
+    <div class="exam-questions">
+      <ol>
+        <li><strong>What is the shape of your original image?</strong><br>
+          <code>img.shape</code> returns <code>(height, width, channels)</code>, e.g., <code>(480, 640, 3)</code></li>
+        <li><strong>Why do we convert BGR to RGB?</strong><br>
+          OpenCV reads images in BGR order; matplotlib and most display tools expect RGB. Displaying BGR as RGB swaps the red and blue channels, making the image look wrong.</li>
+        <li><strong>Why is resizing important before training a deep learning model?</strong><br>
+          Neural networks require fixed input dimensions. All images in a dataset must be the same size (e.g., 150×150 or 224×224) so they can be batched together for training.</li>
+        <li><strong>Which preprocessing operation improved image quality the most?</strong><br>
+          Brightness/contrast adjustment (<code>convertScaleAbs</code>) typically has the most visible effect on image quality.</li>
+        <li><strong>Why is preprocessing important in computer vision?</strong><br>
+          Raw images have inconsistent sizes, lighting, and noise. Preprocessing standardizes them so the model learns features rather than irrelevant variations.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3 id="w7-edges">7.2 Lab Task 2 — Edge Detection and Contours</h3>
+
+  <div class="pipeline">
+    <span class="pipeline-step">Original</span><span class="pipeline-arrow">→</span>
+    <span class="pipeline-step">Grayscale</span><span class="pipeline-arrow">→</span>
+    <span class="pipeline-step">Gaussian Blur</span><span class="pipeline-arrow">→</span>
+    <span class="pipeline-step">Canny Edge Detection</span><span class="pipeline-arrow">→</span>
+    <span class="pipeline-step">Contours</span><span class="pipeline-arrow">→</span>
+    <span class="pipeline-step">Bounding Boxes</span>
+  </div>
+
+  <pre><code class="language-python"># Canny Edge Detection
+edges = cv2.Canny(blurred_gray, low_threshold=100, high_threshold=200)
+# Two thresholds: strong edges (above high), weak edges (between), noise (below low)
+# Weak edges kept only if connected to strong edges
+# Output: binary image — white pixels = edges
+
+# Find and draw contours
+contours, hierarchy = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+cv2.drawContours(output_img, contours, -1, (255, 0, 0), 2)   # -1 = all contours
+
+# Filter small contours (remove noise)
+filtered = [cnt for cnt in contours if cv2.contourArea(cnt) > 100]
+
+# Bounding boxes
+for cnt in filtered_contours:
+    x, y, w, h = cv2.boundingRect(cnt)
+    cv2.rectangle(output, (x, y), (x+w, y+h), (255, 0, 0), 2)</code></pre>
+
+  <div class="callout exam">
+    <div class="callout-label">Exam — Lab Task 2 Questions</div>
+    <div class="exam-questions">
+      <ol>
+        <li><strong>What is an edge in an image?</strong><br>
+          A boundary where pixel intensity changes sharply — typically where one object ends and another begins (e.g., the outline of a coin on a table).</li>
+        <li><strong>Why do we apply blur before Canny edge detection?</strong><br>
+          Canny detects intensity gradients. Noise creates many small gradients that produce false edges. Gaussian blur averages neighboring pixels, smoothing noise before the gradient is computed.</li>
+        <li><strong>How many objects/contours were detected?</strong><br>
+          Depends on image. After filtering with <code>area &gt; 100</code>, remaining contours represent real objects.</li>
+        <li><strong>What happens when you change low_threshold and high_threshold?</strong><br>
+          Lower thresholds → more edges detected (including noise). Higher thresholds → fewer, stronger edges only. The ratio high:low = 2:1 or 3:1 is a good starting point.</li>
+        <li><strong>Mention two real-life applications of edge detection.</strong><br>
+          Lane detection in self-driving cars; tumor boundary detection in medical imaging. (Also: document scanning, manufacturing defect detection, robotics object grasping.)</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3 id="w7-face">7.3 Lab Task 3 — Face Detection with Haar Cascade</h3>
+
+  <div class="callout">
+    <div class="callout-label">Important distinction</div>
+    <strong>Face Detection</strong> — Finds WHERE the face is in an image (bounding box location)<br>
+    <strong>Face Recognition</strong> — Identifies WHOSE face it is (identity)
+  </div>
+
+  <pre><code class="language-python"># Load Haar Cascade
+face_cascade = cv2.CascadeClassifier(
+    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+)
+
+# Detect faces
+faces = face_cascade.detectMultiScale(
+    gray_image,
+    scaleFactor=1.1,   # how much image is reduced at each scale (1.1 = 10% reduction)
+    minNeighbors=5     # neighboring rectangles needed before calling it a face
+)
+# Returns: array of (x, y, width, height) for each face
+
+# Draw detected faces
+for (x, y, w, h) in faces:
+    cv2.rectangle(output, (x, y), (x+w, y+h), (255, 0, 0), 3)</code></pre>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Parameter</th><th>Lower value</th><th>Higher value</th></tr></thead>
+      <tbody>
+        <tr><td><strong>scaleFactor</strong></td><td>1.05 → more detections, slower, more false positives</td><td>1.3 → fewer detections, faster</td></tr>
+        <tr><td><strong>minNeighbors</strong></td><td>2 → more detections, more false positives</td><td>8+ → fewer false positives, may miss real faces</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>Haar Cascade limitations:</strong> Only detects frontal faces; fails in low light; produces false positives; cannot handle tilted/profile faces; cannot handle occlusion; slower and less accurate than modern DL detectors (MTCNN, RetinaFace).</p>
+
+  <div class="callout exam">
+    <div class="callout-label">Exam — Lab Task 3 Questions</div>
+    <div class="exam-questions">
+      <ol>
+        <li><strong>What is face detection?</strong><br>
+          The process of locating and drawing a bounding box around a human face in an image or video. It tells you WHERE faces are, not WHO they belong to.</li>
+        <li><strong>What is the difference between face detection and face recognition?</strong><br>
+          Detection finds the location of faces (bounding box). Recognition identifies whose face it is (identity matching against a database).</li>
+        <li><strong>How many faces were detected in each image?</strong><br>
+          The <code>len(faces)</code> variable gives this count after <code>detectMultiScale()</code>.</li>
+        <li><strong>What happens when you change scaleFactor?</strong><br>
+          It controls how much the image is shrunk at each scale. Lower (1.05) = finer search = more detections + more false positives + slower. Higher (1.3) = coarser search = fewer detections + faster.</li>
+        <li><strong>What are the limitations of Haar Cascade?</strong><br>
+          Only detects frontal faces; fails in low light; produces false positives; cannot handle tilted/profile faces; cannot handle occlusion; slower and less accurate than modern DL detectors (MTCNN, RetinaFace).</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 8 -->
+  <h2 id="w8"><span class="week-badge" style="background:#fff1f2;color:var(--w8)">Week 8</span> Object Detection with YOLO</h2>
+
+  <ul class="file-list">
+    <li>Week 8/Weapon_Detection_YOLO_Roboflow_Lab (1).ipynb</li>
+    <li>Week 8/Yolo.png</li>
+    <li>Week 8/hf_yolo_weapon_detection_space/app.py</li>
+    <li>Week 8/hf_yolo_weapon_detection_space/README.md</li>
+    <li>Week 8/hf_yolo_weapon_detection_space/DEPLOYMENT_STEPS.txt</li>
+  </ul>
+
+  <h3 id="w8-yolo">8.1 YOLO — What It Is</h3>
+
+  <p><strong>YOLO = You Only Look Once</strong><br>
+  A real-time object detection algorithm that predicts bounding boxes and class labels in a <strong>single forward pass</strong> through the network.</p>
+
+  <div class="callout">
+    <div class="callout-label">Classification vs Detection</div>
+    <strong>Classification:</strong> What is in the image? → one label<br>
+    <strong>Detection:</strong> Where are the objects and what are they? → multiple bounding boxes + labels
+  </div>
+
+  <pre><code class="language-python">from ultralytics import YOLO
+model = YOLO("yolov8n.pt")   # n = nano (fastest), s = small, m = medium, l = large, x = xlarge</code></pre>
+
+  <h3 id="w8-project">8.2 Weapon Detection Project</h3>
+
+  <p><strong>Dataset source:</strong> Roboflow (workspace: <code>maheshchhetri</code>, project: <code>weapon-detection-e6otc</code>, version 3)</p>
+
+  <div class="result-grid">
+    <div class="result-card"><div class="val">4</div><div class="lbl">Classes</div></div>
+    <div class="result-card"><div class="val">1,356</div><div class="lbl">Train images</div></div>
+    <div class="result-card"><div class="val">232</div><div class="lbl">Val images</div></div>
+    <div class="result-card"><div class="val">275</div><div class="lbl">Test images</div></div>
+  </div>
+
+  <p><strong>Classes:</strong> <code>['Handgun', 'Knife', 'Rifle', 'Sword']</code></p>
+
+  <pre><code class="language-python">model = YOLO("yolov8n.pt")   # load pre-trained YOLOv8 nano weights
+results = model.train(
+    data=data_yaml_path,        # path to data.yaml
+    epochs=15,
+    imgsz=640,                  # all images resized to 640×640
+    batch=8,
+    name="weapon_detection_yolov8_roboflow"
+)</code></pre>
+
+  <div class="callout">
+    <div class="callout-label">Note — format discrepancy</div>
+    The notebook downloads in <code>"yolov11"</code> format from Roboflow but trains with <code>yolov8n.pt</code>. This is fine — Roboflow's YOLOv11 export format is compatible with YOLOv8 training (same directory structure and <code>data.yaml</code>).
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Class</th><th>Precision</th><th>Recall</th><th>mAP@0.5</th><th>mAP@0.5:0.95</th></tr></thead>
+      <tbody>
+        <tr><td><strong>All</strong></td><td>0.804</td><td>0.539</td><td><strong>0.683</strong></td><td>0.409</td></tr>
+        <tr><td>Handgun</td><td>0.832</td><td>0.405</td><td>0.573</td><td>0.370</td></tr>
+        <tr><td>Knife</td><td>0.739</td><td>0.400</td><td>0.547</td><td>0.292</td></tr>
+        <tr><td>Rifle</td><td>0.859</td><td>0.667</td><td><strong>0.836</strong></td><td>0.520</td></tr>
+        <tr><td>Sword</td><td>0.789</td><td>0.687</td><td>0.776</td><td>0.452</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="w8-concepts">8.3 Key YOLO Concepts</h3>
+
+  <p><strong>data.yaml:</strong> YAML file that tells YOLO where to find train/val/test images and class names. Auto-generated by Roboflow export.</p>
+
+  <p><strong>best.pt:</strong> The model weights file saved after training — specifically the checkpoint with the best validation mAP.</p>
+
+  <h4>Confidence Threshold</h4>
+  <pre><code class="language-python">model.predict(source=image, conf=0.4)   # only show detections with ≥ 40% confidence</code></pre>
+
+  <h4>Prediction and Getting Results</h4>
+  <pre><code class="language-python">results = model.predict(source=image_path, conf=0.4, save=True)
+for box in results[0].boxes:
+    cls_id = int(box.cls[0])
+    conf   = float(box.conf[0])
+    label  = model.names[cls_id]
+    print(f"{label}: {conf:.2f}")</code></pre>
+
+  <h3 id="w8-metrics">8.4 Evaluation Metrics</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Formula</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Precision</strong></td><td>TP / (TP + FP)</td><td>Of all detections made, what fraction were correct?</td></tr>
+        <tr><td><strong>Recall</strong></td><td>TP / (TP + FN)</td><td>Of all actual objects, what fraction did the model find?</td></tr>
+        <tr><td><strong>mAP@0.5</strong></td><td>Mean AP at IoU=0.5</td><td>Average precision across all classes at 50% overlap. Industry standard.</td></tr>
+        <tr><td><strong>mAP@0.5:0.95</strong></td><td>Mean AP at IoU 0.5→0.95</td><td>Stricter version — averages across IoU thresholds.</td></tr>
+        <tr><td><strong>IoU</strong></td><td>(overlap area) / (union area)</td><td>Measures overlap between predicted box and ground truth box. ≥0.5 = correct detection.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Training Output Files</h4>
+  <ul>
+    <li><code>results.png</code> — accuracy and loss curves</li>
+    <li><code>confusion_matrix.png</code> — which classes get confused with each other</li>
+    <li><code>PR_curve.png</code> — Precision-Recall curve</li>
+    <li><code>F1_curve.png</code> — F1 score vs confidence threshold</li>
+    <li><code>weights/best.pt</code> — best saved model</li>
+  </ul>
+
+  <h3 id="w8-roboflow">8.5 Roboflow Integration</h3>
+
+  <pre><code class="language-python">from roboflow import Roboflow
+
+rf = Roboflow(api_key="your_api_key")
+project = rf.workspace("maheshchhetri").project("weapon-detection-e6otc")
+version  = project.version(3)
+dataset  = version.download("yolov8")   # downloads dataset + data.yaml</code></pre>
+
+  <p>Roboflow handles dataset hosting, augmentation, labeling, and export in YOLO/COCO formats. The downloaded folder contains <code>train/</code>, <code>valid/</code>, <code>test/</code> directories and a <code>data.yaml</code> that YOLO reads directly.</p>
+
+  <h3 id="w8-deploy">8.6 Hugging Face Deployment (Gradio App)</h3>
+
+  <pre><code class="language-python">import gradio as gr
+from ultralytics import YOLO
+from PIL import Image
+
+model = YOLO("best.pt")
+
+def detect_image(image, confidence):
+    if image is None:
+        return None, "Please upload or capture an image first."
+
+    image = image.convert("RGB")
+    results = model.predict(source=image, conf=confidence, save=False)
+    annotated_image = Image.fromarray(results[0].plot())   # draw boxes on image
+
+    names = model.names
+    detected = []
+    if results[0].boxes is not None:
+        for box in results[0].boxes:
+            cls_id = int(box.cls[0])
+            conf   = float(box.conf[0])
+            detected.append(f"{names[cls_id]}: {conf:.2f}")
+
+    summary = "No object detected." if not detected else "Detected objects:\n" + "\n".join(detected)
+    return annotated_image, summary
+
+with gr.Blocks(title="YOLO Weapon Detection") as demo:
+    # ... input image, confidence slider, detect button, output image + text
+    pass
+
+demo.launch()</code></pre>
+
+  <div class="callout">
+    <div class="callout-label">Deployment workflow</div>
+    1. Train YOLO in Google Colab → save <code>best.pt</code><br>
+    2. Create Hugging Face Space (Gradio SDK)<br>
+    3. Upload <code>best.pt</code>, <code>app.py</code>, <code>requirements.txt</code><br>
+    4. Space runs the Gradio app publicly
+  </div>
+
+  <h3 id="w8-ethics">8.7 Ethical Considerations for Weapon Detection</h3>
+
+  <div class="callout red">
+    <div class="callout-label">Important limitations &amp; ethics</div>
+    <ul>
+      <li>System may produce <strong>false positives</strong> (non-weapon detected as weapon)</li>
+      <li>System may have <strong>false negatives</strong> (real weapon missed)</li>
+      <li>Low quality CCTV footage reduces accuracy significantly</li>
+      <li>Dataset bias affects performance — model may not generalize across cultures/weapon types</li>
+      <li><strong>Human verification always required before any action</strong></li>
+      <li>Not suitable for unauthorized surveillance</li>
+      <li>Educational and public safety research purpose only</li>
+    </ul>
+  </div>
+
+  <h3 id="w8-report">8.8 Student Report Questions (Exam Prep)</h3>
+
+  <div class="callout exam">
+    <div class="callout-label">Exam — Week 8 Report Questions (all 10)</div>
+    <div class="exam-questions">
+      <ol>
+        <li><strong>What is the objective of weapon detection?</strong><br>
+          To automatically identify weapons (handgun, knife, rifle, sword) in images/video for public safety and security monitoring.</li>
+        <li><strong>Which dataset did you use from Roboflow?</strong><br>
+          <code>weapon-detection-e6otc</code> by <code>maheshchhetri</code>, version 3, CC BY 4.0 license.</li>
+        <li><strong>What classes were present in your dataset?</strong><br>
+          4 classes: Handgun, Knife, Rifle, Sword.</li>
+        <li><strong>How many images for training, validation, and testing?</strong><br>
+          Train: 1,356 | Val: 232 | Test: 275.</li>
+        <li><strong>Which YOLO model did you use?</strong><br>
+          YOLOv8 nano (<code>yolov8n.pt</code>) — smallest and fastest variant.</li>
+        <li><strong>What were the training parameters?</strong><br>
+          <code>epochs=15, imgsz=640, batch=8</code>.</li>
+        <li><strong>What were precision, recall, mAP@0.5, mAP@0.5:0.95?</strong><br>
+          Overall: P=0.804, R=0.539, mAP50=0.683, mAP50-95=0.409. Best class: Rifle (mAP50=0.836). Worst: Knife (mAP50=0.547).</li>
+        <li><strong>Mention 5 limitations of the model:</strong>
+          <ul>
+            <li>May produce false positives (toys or tools detected as weapons)</li>
+            <li>Low recall (0.539) — misses many real weapons</li>
+            <li>Trained on limited data (~1,356 images)</li>
+            <li>Struggles with small, blurry, or occluded weapons</li>
+            <li>Dataset bias — may not generalize to all weapon types/cultures</li>
+          </ul>
+        </li>
+        <li><strong>Why is human verification required?</strong><br>
+          AI models have false positives and negatives. Acting on incorrect detections (arresting someone, triggering alarms) without human review could cause harm, violate rights, and erode trust in the system.</li>
+        <li><strong>Final conclusion template:</strong><br>
+          <em>"In this lab, we trained a YOLO-based weapon detection model using a Roboflow dataset. The model detected classes such as Handgun, Knife, Rifle, Sword with confidence scores. Despite reasonable mAP performance, the model has limitations including false positives, false negatives, and dataset bias. Therefore, human verification is necessary before making any security decision."</em></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────── SECTION 9 -->
+  <h2 id="core">9 · Cross-Week Core Concepts</h2>
+
+  <h3>9.1 Activation Functions</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Function</th><th>Formula</th><th>Use case</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ReLU</strong></td><td><code>max(0, x)</code></td><td>Hidden layers — most common, avoids vanishing gradient</td></tr>
+        <tr><td><strong>Sigmoid</strong></td><td><code>1 / (1 + e^-x)</code></td><td>Binary classification output (0 to 1)</td></tr>
+        <tr><td><strong>Softmax</strong></td><td><code>e^xi / Σe^xj</code></td><td>Multi-class output (probabilities sum to 1)</td></tr>
+        <tr><td><strong>Linear</strong></td><td><code>x</code></td><td>Regression output (no bounds)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>9.2 Loss Functions</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Loss</th><th>Use when</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Binary Crossentropy</strong></td><td>Binary classification (0 or 1 output, sigmoid)</td></tr>
+        <tr><td><strong>Sparse Categorical Crossentropy</strong></td><td>Multi-class, integer labels (not one-hot encoded)</td></tr>
+        <tr><td><strong>Categorical Crossentropy</strong></td><td>Multi-class, one-hot encoded labels</td></tr>
+        <tr><td><strong>MAE (Mean Absolute Error)</strong></td><td>Regression — average absolute difference</td></tr>
+        <tr><td><strong>MSE (Mean Squared Error)</strong></td><td>Regression — penalizes large errors more</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>9.3 Optimizers</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Optimizer</th><th>Key Feature</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SGD</strong></td><td>Stochastic Gradient Descent — simple, needs manual LR tuning</td></tr>
+        <tr><td><strong>Adam</strong></td><td>Adaptive learning rates per parameter — most commonly used in this course</td></tr>
+        <tr><td><strong>RMSprop</strong></td><td>Adaptive LR — good for RNNs and noisy gradients</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>Typical learning rates:</strong> <code>0.001</code> for initial training, <code>1e-5</code> for fine-tuning pre-trained models.</p>
+
+  <h3>9.4 Training Concepts</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Epoch</strong></td><td>One complete pass through the entire training dataset</td></tr>
+        <tr><td><strong>Batch size</strong></td><td>Number of samples processed before weights are updated. Typical: 32</td></tr>
+        <tr><td><strong>Normalization</strong></td><td>Divide pixel values by 255.0 to get 0–1 range. Helps gradient flow</td></tr>
+        <tr><td><strong>Learning rate</strong></td><td>0.001 (initial training), 1e-5 (fine-tuning)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>model.fit() History Keys</h4>
+  <pre><code class="language-python">history.history.keys()
+# Single output:  ['loss', 'accuracy', 'val_loss', 'val_accuracy']
+# Multi-output:   ['loss', 'age_output_mae', 'gender_output_accuracy',
+#                  'val_loss', 'val_age_output_mae', 'val_gender_output_accuracy']
+plt.plot(history.history['accuracy'])   # plot training accuracy per epoch</code></pre>
+
+  <h3>9.5 Common Code Patterns &amp; Model Saving</h3>
+  <pre><code class="language-python"># Add batch dimension
+img = np.expand_dims(img_array, axis=0)   # (H, W, C) → (1, H, W, C)
+
+# Get predicted class from probabilities
+np.argmax(prediction[0])   # index of highest probability = predicted class
+
+# Train/test split
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Stratified split (for imbalanced data)
+train_df, val_df = train_test_split(df, test_size=0.2, stratify=df["gender"])
+
+# Save and load model
+model.save("my_model.keras")             # recommended format
+model = tf.keras.models.load_model("my_model.keras")</code></pre>
+
+  <!-- ─────────────────────────────────────────── SECTION 10 -->
+  <h2 id="glossary">10 · Quick-Reference Glossary</h2>
+
+  <div class="glossary-grid">
+    <div class="glossary-item"><div class="glossary-term">Perceptron</div><div class="glossary-def">Simplest neural unit — weighted sum + step function. Can only solve linearly separable problems.</div></div>
+    <div class="glossary-item"><div class="glossary-term">MLP</div><div class="glossary-def">Multi-Layer Perceptron — multiple Dense layers. Can learn non-linear patterns.</div></div>
+    <div class="glossary-item"><div class="glossary-term">ANN</div><div class="glossary-def">Artificial Neural Network — general term for any network of neurons.</div></div>
+    <div class="glossary-item"><div class="glossary-term">CNN</div><div class="glossary-def">Convolutional Neural Network — uses Conv2D layers to extract spatial features from images.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Feature Map</div><div class="glossary-def">Output of a convolutional filter applied to an input image.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Kernel/Filter</div><div class="glossary-def">Small matrix of learnable weights in Conv2D (e.g., 3×3).</div></div>
+    <div class="glossary-item"><div class="glossary-term">Stride</div><div class="glossary-def">How many pixels the filter moves at each step.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Padding</div><div class="glossary-def">Adding zeros around image to preserve spatial dimensions (padding="same").</div></div>
+    <div class="glossary-item"><div class="glossary-term">MaxPooling</div><div class="glossary-def">Downsampling operation. MaxPooling takes max in each 2×2 window.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Dropout</div><div class="glossary-def">Regularization — randomly zeroes fraction of neurons per training step.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Batch Normalization</div><div class="glossary-def">Normalizes layer activations per mini-batch — stabilizes and speeds training.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Overfitting</div><div class="glossary-def">Model memorizes training data; poor generalization. Train acc >> Val acc.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Underfitting</div><div class="glossary-def">Model too simple to learn. Both train and val acc are low.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Transfer Learning</div><div class="glossary-def">Using weights pre-trained on a large dataset for a new task.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Fine-tuning</div><div class="glossary-def">Unfreezing and retraining last layers of pre-trained model with small LR (1e-5).</div></div>
+    <div class="glossary-item"><div class="glossary-term">ImageNet</div><div class="glossary-def">1.2M image, 1000-class dataset used to pre-train most vision models.</div></div>
+    <div class="glossary-item"><div class="glossary-term">GAP</div><div class="glossary-def">GlobalAveragePooling2D — averages each feature map to one value. Reduces params.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Multi-output model</div><div class="glossary-def">One model with multiple output heads (e.g., age + gender simultaneously).</div></div>
+    <div class="glossary-item"><div class="glossary-term">MAE</div><div class="glossary-def">Mean Absolute Error — average of |predicted - actual|. Used for regression.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Binary Crossentropy</div><div class="glossary-def">Loss for 2-class problems with sigmoid output.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Softmax</div><div class="glossary-def">Activation for multi-class output — outputs sum to 1.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Sigmoid</div><div class="glossary-def">Activation for binary classification — outputs 0 to 1.</div></div>
+    <div class="glossary-item"><div class="glossary-term">BGR</div><div class="glossary-def">Blue-Green-Red — OpenCV's default channel order (opposite of standard RGB).</div></div>
+    <div class="glossary-item"><div class="glossary-term">Canny</div><div class="glossary-def">Edge detection algorithm using intensity gradient + two thresholds.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Contour</div><div class="glossary-def">Continuous curve along the boundary of an object in an image.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Haar Cascade</div><div class="glossary-def">Classical (non-DL) face detection using Haar-like features + AdaBoost.</div></div>
+    <div class="glossary-item"><div class="glossary-term">YOLO</div><div class="glossary-def">You Only Look Once — single-pass real-time object detection.</div></div>
+    <div class="glossary-item"><div class="glossary-term">mAP</div><div class="glossary-def">Mean Average Precision — standard detection evaluation metric.</div></div>
+    <div class="glossary-item"><div class="glossary-term">IoU</div><div class="glossary-def">Intersection over Union — measures overlap between predicted and actual bounding box.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Bounding Box</div><div class="glossary-def">Rectangle (x, y, width, height) around a detected object.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Roboflow</div><div class="glossary-def">Platform for dataset hosting, labeling, and export in YOLO/COCO formats.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Gradio</div><div class="glossary-def">Python library for building quick ML demo web interfaces.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Hugging Face Spaces</div><div class="glossary-def">Free hosting for ML demos (Gradio/Streamlit apps).</div></div>
+    <div class="glossary-item"><div class="glossary-term">data.yaml</div><div class="glossary-def">YOLO's dataset configuration file — class names, paths to train/val/test images.</div></div>
+    <div class="glossary-item"><div class="glossary-term">best.pt</div><div class="glossary-def">YOLO's saved model weights file from the best-performing training checkpoint.</div></div>
+    <div class="glossary-item"><div class="glossary-term">tf.data</div><div class="glossary-def">TensorFlow's high-performance data pipeline API. Replaces old ImageDataGenerator.</div></div>
+    <div class="glossary-item"><div class="glossary-term">preprocess_input</div><div class="glossary-def">Model-specific normalization function (different for ResNet50, MobileNetV2, etc.).</div></div>
+    <div class="glossary-item"><div class="glossary-term">decode_predictions</div><div class="glossary-def">Converts ImageNet model output probabilities to human-readable class names.</div></div>
+    <div class="glossary-item"><div class="glossary-term">EarlyStopping</div><div class="glossary-def">Stops training when a monitored metric stops improving (saves time, prevents overfit).</div></div>
+    <div class="glossary-item"><div class="glossary-term">ReduceLROnPlateau</div><div class="glossary-def">Reduces learning rate when training plateaus.</div></div>
+    <div class="glossary-item"><div class="glossary-term">ModelCheckpoint</div><div class="glossary-def">Saves model weights when monitored metric improves.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Confidence threshold</div><div class="glossary-def">Minimum confidence score to count a detection as valid (e.g., 0.4 = 40%).</div></div>
+    <div class="glossary-item"><div class="glossary-term">Precision</div><div class="glossary-def">TP / (TP + FP) — of all positive predictions, how many were correct.</div></div>
+    <div class="glossary-item"><div class="glossary-term">Recall</div><div class="glossary-def">TP / (TP + FN) — of all actual positives, how many did model find.</div></div>
+    <div class="glossary-item"><div class="glossary-term">F1 Score</div><div class="glossary-def">Harmonic mean of Precision and Recall.</div></div>
+  </div>
+
+  <div class="footnote">
+    PGD Deep Learning 2026 · Study Reference v3 · Last updated 2026-06-09<br>
+    Source: All course notebooks, PDFs, and images from PGD-Deep-Learning-2026 repository
+  </div>
+
+</main>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+    toggle.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    toggle.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+  overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar when a nav link is tapped on mobile
+  sidebar.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) closeSidebar();
+    });
+  });
+</script>
+</body>
+</html>
