@@ -1,0 +1,25 @@
+names:
+- Bacterial Conjunctivitis
+- Cataract
+- Chalazion
+- Conjunctivitis
+- Foreign Object
+- Hordeolum
+- Katarak
+- Normal
+- Pinguecula
+- Ptrigio-Pinguecula
+- Viral Conjunctivitis
+- cataract
+- normal
+- normal eye
+nc: 14
+roboflow:
+  license: CC BY 4.0
+  project: eye-disease-yg5lp
+  url: https://universe.roboflow.com/fabricdefect-g0o4o/eye-disease-yg5lp/dataset/4
+  version: 4
+  workspace: fabricdefect-g0o4o
+test: ../test/images
+train: ../train/images
+val: ../valid/images
