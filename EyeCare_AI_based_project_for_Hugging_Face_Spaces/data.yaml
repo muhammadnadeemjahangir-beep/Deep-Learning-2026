@@ -1,0 +1,15 @@
+names:
+- Cataract
+- Jaundice
+- Normal_Eye
+- Pterygium
+nc: 4
+roboflow:
+  license: CC BY 4.0
+  project: eye-disease-jio2h
+  url: https://universe.roboflow.com/md-nawshin-navin/eye-disease-jio2h/dataset/5
+  version: 5
+  workspace: md-nawshin-navin
+test: ../test/images
+train: ../train/images
+val: ../valid/images

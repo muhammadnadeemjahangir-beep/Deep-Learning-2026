@@ -1,0 +1,8 @@
+ultralytics
+gradio
+pillow
+torch
+torchvision
+opencv-python-headless
+numpy<2
+audioop-lts 
